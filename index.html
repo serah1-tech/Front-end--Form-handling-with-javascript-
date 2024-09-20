@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data Handling</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="form-section">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" required>
+
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="male" required> Male
+            <input type="radio" name="gender" value="female" required> Female
+
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="">Select...</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+                <option value="Australia">Australia</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="terms" required> I accept terms and conditions
+            </label>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="summary-section" id="summarySection" style="display: none;">
+        <h2>Form Summary</h2>
+        <p id="summary"></p>
+    </div>
+
+    <script>
+        // JavaScript for handling form submission and validation
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Capture form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const age = document.getElementById('age').value;
+            const gender = document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : 'Not specified';
+            const country = document.getElementById('country').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Simple validation
+            if (terms) {
+                const summaryText = `
+                    Name: ${name}<br>
+                    Email: ${email}<br>
+                    Password: ${password}<br>
+                    Age: ${age}<br>
+                    Gender: ${gender}<br>
+                    Country: ${country}
+                `;
+                document.getElementById('summary').innerHTML = summaryText;
+                document.getElementById('summarySection').style.display = 'block'; // Show summary
+            } else {
+                alert('Please accept the terms and conditions.');
+            }
+        });
+    </script>
+</body>
+</html>
